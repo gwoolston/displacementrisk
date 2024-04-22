@@ -277,6 +277,50 @@ function geomStyleDC(feature) {
   };
 }
 
+function geomStyleDC1(feature) {
+  let fillColor = feature.properties.DC1color || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStyleDC2(feature) {
+  let fillColor = feature.properties.DC2color || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStyleDC3(feature) {
+  let fillColor = feature.properties.DC3color || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStyleDC4(feature) {
+  let fillColor = feature.properties.DC4color || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
 function geomStyleHM(feature) {
   let fillColor = feature.properties.HMcolor || "#bdbdbd";
   return {
@@ -619,6 +663,167 @@ let pv8GeojsonLayer = L.geoJSON(fc, {
 
 
 
+    // Demographic Change
+    let dcGeojsonLayer = L.geoJSON(fc, {
+      onEachFeature: function (feature, layer) {
+        layer.on({
+          mouseout: function (e) {
+               e.target.setStyle(geomStyleDC);
+          },
+          click: function (e) {
+            var popupContent = `
+                <table class="popup-table">
+                    <tr>
+                        <td><strong>ID:</strong></td>
+                        <td>${e.target.feature.properties.id}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Demographic Change:</strong></td>
+                        <td>${e.target.feature.properties.DC}</td>
+                    </tr>
+                </table>
+            `;
+        
+            // Bind the formatted popup content to the target feature and open the popup
+            e.target.bindPopup(popupContent).openPopup();
+        
+            // Prevent propagation of the click event
+            L.DomEvent.stopPropagation(e);
+        },
+        });
+      },
+      style: geomStyleDC,
+    });
+
+// Demographic Change - Indicator 1 - Percent Change White
+let dc1GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStyleDC1);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Percent Change white:</strong></td>
+                    <td>${e.target.feature.properties.DC1white}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStyleDC1,
+});
+
+// Demographic Change - Indicator 2 - Percent Change Income
+let dc2GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStyleDC2);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Percent Change Income:</strong></td>
+                    <td>${e.target.feature.properties.DC2income}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStyleDC2,
+});
+
+// Demographic Change - Indicator 3 - Percent Change Higher Education
+let dc3GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStyleDC3);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Percent Change Higher Ed:</strong></td>
+                    <td>${e.target.feature.properties.DC3highed}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStyleDC3,
+});
+
+// Demographic Change - Indicator 4 - Percent Change Owners
+let dc4GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStyleDC4);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Percent Change Owners:</strong></td>
+                    <td>${e.target.feature.properties.DC4own}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStyleDC4,
+});
+
+
 
 
 var baseMaps = {
@@ -631,7 +836,15 @@ var baseMaps = {
     "1.5 Rent Burden": pv5GeojsonLayer,
     "1.6 Percent SNAP": pv6GeojsonLayer,
     "1.7 Percent Limited English": pv7GeojsonLayer,
-    "1.8 Percent Single Parent": pv8GeojsonLayer
+    "1.8 Percent Single Parent": pv8GeojsonLayer,
+    "2 Demographic Change": dcGeojsonLayer,
+    "2.1 Percent Change White": dc1GeojsonLayer,
+    "2.2 Percent Change Income": dc2GeojsonLayer,
+    "2.3 Percent Change Education": dc3GeojsonLayer,
+    "2.4 Percent Change Ownership": dc4GeojsonLayer
+    // "3 Housing Market": hmGeojsonLayer,
+    // "3.1 Home Value Type": hm1GeojsonLayer,
+    // "3.2 Appreciation Type": hm2GeojsonLayer
 
   };
 
