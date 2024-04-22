@@ -40,12 +40,12 @@ function init() {
   }).addTo(map);
 
   var labelsBasemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  subdomains: 'abcd',
-  maxZoom: 16
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 20
 }).addTo(map);
 
-  map.on("click", function () {
+ map.on("click", function () {
     map.closePopup();
   });
 
@@ -1009,6 +1009,16 @@ let hm2GeojsonLayer = L.geoJSON(fc, {
   style: geomStyleHM2,
 });
 
+var labelsBasemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 16
+}).addTo(map);
+
+var topPane = map._createPane('leaflet-top-pane', map.getPanes().mapPane);
+topPane.appendChild(labelsBasemap.getContainer());
+labelsBasemap.setZIndex(5); // Adjust the value as needed
+
 var baseMaps = {
     "<b>Displacement Risk</b>": drGeojsonLayer,
     "<b><i>1 Population Vulnerability</i></b>": pvGeojsonLayer,
@@ -1030,7 +1040,6 @@ var baseMaps = {
     "3.2 Appreciation Type": hm2GeojsonLayer
 
   };
-
 
 // Create the control and add it to the map;
 var control = L.control.layers(baseMaps, null, { collapsed: false, position: 'topleft' });
