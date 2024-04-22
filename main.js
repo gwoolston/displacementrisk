@@ -383,15 +383,15 @@ function geomStyleHM2(feature) {
                   </tr>
                   <tr>
                   <td><strong>Population Vulnerability:</strong></td>
-                  <td>${e.target.feature.properties.pv}</td>
+                  <td>${e.target.feature.properties.PV}</td>
                   </tr> 
                   <tr>
                   <td><strong>Demographic Change:</strong></td>
-                  <td>${e.target.feature.properties.dc}</td>
+                  <td>${e.target.feature.properties.DC}</td>
                   </tr>  
                   <tr>
                   <td><strong>Housing Market Status:</strong></td>
-                  <td>${e.target.feature.properties.hm}</td>
+                  <td>${e.target.feature.properties.HM}</td>
                   </tr>   
               </table>
           `;
