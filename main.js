@@ -21,8 +21,8 @@ function init() {
 
   // Create Map, Center on Santa Cruz
   var mapOptions = {
-    center: [36.97454495119759, -122.0082478286594],
-    zoom: 12,
+    center: [37.06961402113251, -121.85643431204376],
+    zoom: 11,
     zoomControl: false
   }
  map = L.map('map', mapOptions);
@@ -81,11 +81,53 @@ function addGeoms(data) {
           if (geojsonData.features && Array.isArray(geojsonData.features)) {
             geojsonData.features.forEach((feature) => {
               let properties = {
+
+                // General Info
                 id: data[row].id,
 
                 // Displacement Risk
                 dr: data[row].dr,
                 drcolor: data[row].drcolor,
+
+                // Population Vulnerability (PV)
+                PV: data[row].pv,
+                PVcolor: data[row].pvcolor,
+                PV1rent: data[row].pv1rent,
+                PV1color: data[row].pv1color,
+                PV2poc: data[row].pv2poc,
+                PV2color: data[row].pv2color,
+                PV3highed: data[row].pv3highed,
+                PV3color: data[row].pv3color,
+                PV4income: data[row].pv4income,
+                PV4color: data[row].pv4color,
+                PV5burden: data[row].pv5burden,
+                PV5color: data[row].pv5color,
+                PV6snap: data[row].pv6snap,
+                PV6color: data[row].pv6color,
+                PV7language: data[row].pv7language,
+                PV7color: data[row].pv7color,
+                PV8single: data[row].pv8single,
+                PV8color: data[row].pv8color,
+
+                // Demographic Change (DC)
+                DC: data[row].dc,
+                DCcolor: data[row].dccolor,
+                DC1white: data[row].dc1white,
+                DC1color: data[row].dc1color,
+                DC2income: data[row].dc2income,
+                DC2color: data[row].dc2color,
+                DC3highed: data[row].dc3highed,
+                DC3color: data[row].dc3color,
+                DC4own: data[row].dc4own,
+                DC4color: data[row].dc4color,
+
+                // Housing Market Status (HM)
+                HM: data[row].hm,
+                HMcolor: data[row].hmcolor,
+                HM1hvt: data[row].hm1hvt,
+                HM1color: data[row].hm1color,
+                HM2at: data[row].hm2at,
+                HM2color: data[row].hm2color,
 
               };
 
@@ -115,7 +157,7 @@ function addGeoms(data) {
 */
 
 function geomStyleDR(feature) {
-  let fillColor = feature.properties.drcolor || "#000000";
+  let fillColor = feature.properties.drcolor || "#bdbdbd";
   return {
     fillColor: fillColor,
     weight: 0,
@@ -125,6 +167,126 @@ function geomStyleDR(feature) {
   };
 }
 
+function geomStylePV(feature) {
+  let fillColor = feature.properties.PVcolor || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStylePV1(feature) {
+  let fillColor = feature.properties.PV1color || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStylePV2(feature) {
+  let fillColor = feature.properties.PV2color || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStylePV3(feature) {
+  let fillColor = feature.properties.PV3color || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStylePV4(feature) {
+  let fillColor = feature.properties.PV4color || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStylePV5(feature) {
+  let fillColor = feature.properties.PV5color || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStylePV6(feature) {
+  let fillColor = feature.properties.PV6color || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStylePV7(feature) {
+  let fillColor = feature.properties.PV7color || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStylePV8(feature) {
+  let fillColor = feature.properties.PV8color || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStyleDC(feature) {
+  let fillColor = feature.properties.DCcolor || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStyleHM(feature) {
+  let fillColor = feature.properties.HMcolor || "#bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 0,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
 
   let geomHoverStyle = { color: "black", weight: 0 };
 
@@ -134,16 +296,13 @@ function geomStyleDR(feature) {
 * Layers
 */
 
-  // Rent Stabalization
+  // Displacement Risk
   let drGeojsonLayer = L.geoJSON(fc, {
     onEachFeature: function (feature, layer) {
       layer.on({
         mouseout: function (e) {
              e.target.setStyle(geomStyleDR);
         },
-        // mouseover: function (e) {
-        //      e.target.setStyle(geomHoverStyle);
-        // },
         click: function (e) {
           // Create the popup content with table formatting
           var popupContent = `
@@ -170,9 +329,312 @@ function geomStyleDR(feature) {
     style: geomStyleDR,
   });drGeojsonLayer.addTo(map);
 
+    // Population Vulnerability
+    let pvGeojsonLayer = L.geoJSON(fc, {
+      onEachFeature: function (feature, layer) {
+        layer.on({
+          mouseout: function (e) {
+               e.target.setStyle(geomStylePV);
+          },
+          click: function (e) {
+            var popupContent = `
+                <table class="popup-table">
+                    <tr>
+                        <td><strong>ID:</strong></td>
+                        <td>${e.target.feature.properties.id}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Population Vulnerability:</strong></td>
+                        <td>${e.target.feature.properties.PV}</td>
+                    </tr>
+                </table>
+            `;
+        
+            // Bind the formatted popup content to the target feature and open the popup
+            e.target.bindPopup(popupContent).openPopup();
+        
+            // Prevent propagation of the click event
+            L.DomEvent.stopPropagation(e);
+        },
+        });
+      },
+      style: geomStylePV,
+    });
+
+// Population Vulnerability - Indicator 1 - Renters
+let pv1GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStylePV1);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Percent Renters:</strong></td>
+                    <td>${e.target.feature.properties.PV1rent}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStylePV1,
+});
+
+// Population Vulnerability - Indicator 2 - PoC
+let pv2GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStylePV2);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Percent People of Color:</strong></td>
+                    <td>${e.target.feature.properties.PV2poc}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStylePV2,
+});
+
+// Population Vulnerability - Indicator 3 - Higher Education
+let pv3GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStylePV3);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Percent without BA:</strong></td>
+                    <td>${e.target.feature.properties.PV3highed}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStylePV3,
+});
+
+// Population Vulnerability - Indicator 4 - Income
+let pv4GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStylePV4);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Income:</strong></td>
+                    <td>${e.target.feature.properties.PV4income}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStylePV4,
+});
+
+// Population Vulnerability - Indicator 5 - Rent Burden
+let pv5GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStylePV5);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Rent Burden:</strong></td>
+                    <td>${e.target.feature.properties.PV5burden}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStylePV5,
+});
+
+// Population Vulnerability - Indicator 6 - SNAP
+let pv6GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStylePV6);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Percent SNAP:</strong></td>
+                    <td>${e.target.feature.properties.PV6snap}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStylePV6,
+});
+
+// Population Vulnerability - Indicator 7 - Limited English
+let pv7GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStylePV7);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Percent Limited English:</strong></td>
+                    <td>${e.target.feature.properties.PV7language}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStylePV7,
+});
+
+// Population Vulnerability - Indicator 8 - Single Parents
+let pv8GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStylePV8);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Percent Single Parent Households:</strong></td>
+                    <td>${e.target.feature.properties.PV8single}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStylePV8,
+});
+
+
+
+
+
 var baseMaps = {
-    "Displacement Risk": drGeojsonLayer
+    "Displacement Risk": drGeojsonLayer,
+    "1 Population Vulnerability": pvGeojsonLayer,
+    "1.1 Percent Renters": pv1GeojsonLayer,
+    "1.2 Percent PoC": pv2GeojsonLayer,
+    "1.3 Percent No Higher Ed": pv3GeojsonLayer,
+    "1.4 Income": pv4GeojsonLayer,
+    "1.5 Rent Burden": pv5GeojsonLayer,
+    "1.6 Percent SNAP": pv6GeojsonLayer,
+    "1.7 Percent Limited English": pv7GeojsonLayer,
+    "1.8 Percent Single Parent": pv8GeojsonLayer
+
   };
+
 
 // Create the control and add it to the map;
 var control = L.control.layers(baseMaps, null, { collapsed: false, position: 'topleft' });
