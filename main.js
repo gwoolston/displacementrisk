@@ -381,6 +381,18 @@ function geomStyleHM2(feature) {
                       <td><strong>Displacement Risk:</strong></td>
                       <td>${e.target.feature.properties.dr}</td>
                   </tr>
+                  <tr>
+                  <td><strong>Population Vulnerability:</strong></td>
+                  <td>${e.target.feature.properties.pv}</td>
+                  </tr> 
+                  <tr>
+                  <td><strong>Demographic Change:</strong></td>
+                  <td>${e.target.feature.properties.dc}</td>
+                  </tr>  
+                  <tr>
+                  <td><strong>Housing Market Status:</strong></td>
+                  <td>${e.target.feature.properties.hm}</td>
+                  </tr>   
               </table>
           `;
       
@@ -412,6 +424,38 @@ function geomStyleHM2(feature) {
                     <tr>
                         <td><strong>Population Vulnerability:</strong></td>
                         <td>${e.target.feature.properties.PV}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Percent Renters:</strong></td>
+                        <td>${e.target.feature.properties.PV1rent}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Percent PoC:</strong></td>
+                        <td>${e.target.feature.properties.PV2poc}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Percent Less than BA:</strong></td>
+                        <td>${e.target.feature.properties.PV3highed}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Income:</strong></td>
+                        <td>${e.target.feature.properties.PV4income}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rent Burden:</strong></td>
+                        <td>${e.target.feature.properties.PV5burden}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Percent SNAP:</strong></td>
+                        <td>${e.target.feature.properties.PV6snap}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Percent Limited English:</strong></td>
+                        <td>${e.target.feature.properties.PV7language}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Percent Single Parent Households:</strong></td>
+                        <td>${e.target.feature.properties.PV8single}</td>
                     </tr>
                 </table>
             `;
@@ -703,6 +747,22 @@ let pv8GeojsonLayer = L.geoJSON(fc, {
                         <td><strong>Demographic Change:</strong></td>
                         <td>${e.target.feature.properties.DC}</td>
                     </tr>
+                    <tr>
+                    <td><strong>Percent Change White:</strong></td>
+                    <td>${e.target.feature.properties.DC1white}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Percent Change Income:</strong></td>
+                    <td>${e.target.feature.properties.DC2income}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Percent Change Higher Education:</strong></td>
+                    <td>${e.target.feature.properties.DC3highed}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Percent Change Ownership:</strong></td>
+                    <td>${e.target.feature.properties.DC4own}</td>
+                    </tr>
                 </table>
             `;
         
@@ -863,6 +923,14 @@ let dc4GeojsonLayer = L.geoJSON(fc, {
                         <td><strong>Housing Market Status:</strong></td>
                         <td>${e.target.feature.properties.HM}</td>
                     </tr>
+                    <tr>
+                        <td><strong>Home Value Type:</strong></td>
+                        <td>${e.target.feature.properties.HM1hvt}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Appreciation Type:</strong></td>
+                        <td>${e.target.feature.properties.HM2at}</td>
+                    </tr>
                 </table>
             `;
         
@@ -942,8 +1010,8 @@ let hm2GeojsonLayer = L.geoJSON(fc, {
 });
 
 var baseMaps = {
-    "Displacement Risk": drGeojsonLayer,
-    "1 Population Vulnerability": pvGeojsonLayer,
+    "<b>Displacement Risk</b>": drGeojsonLayer,
+    "<b><i>1 Population Vulnerability</i></b>": pvGeojsonLayer,
     "1.1 Percent Renters": pv1GeojsonLayer,
     "1.2 Percent PoC": pv2GeojsonLayer,
     "1.3 Percent No Higher Ed": pv3GeojsonLayer,
@@ -952,12 +1020,12 @@ var baseMaps = {
     "1.6 Percent SNAP": pv6GeojsonLayer,
     "1.7 Percent Limited English": pv7GeojsonLayer,
     "1.8 Percent Single Parent": pv8GeojsonLayer,
-    "2 Demographic Change": dcGeojsonLayer,
+    "<b><i>2 Demographic Change</i></b>": dcGeojsonLayer,
     "2.1 Percent Change White": dc1GeojsonLayer,
     "2.2 Percent Change Income": dc2GeojsonLayer,
     "2.3 Percent Change Education": dc3GeojsonLayer,
     "2.4 Percent Change Ownership": dc4GeojsonLayer,
-    "3 Housing Market": hmGeojsonLayer,
+    "<b><i>3 Housing Market</i></b>": hmGeojsonLayer,
     "3.1 Home Value Type": hm1GeojsonLayer,
     "3.2 Appreciation Type": hm2GeojsonLayer
 
