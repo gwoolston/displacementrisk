@@ -157,176 +157,198 @@ function addGeoms(data) {
 */
 
 function geomStyleDR(feature) {
-  let fillColor = feature.properties.drcolor || "#bdbdbd";
+  let fillColor = feature.properties.drcolor || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStylePV(feature) {
-  let fillColor = feature.properties.PVcolor || "#bdbdbd";
+  let fillColor = feature.properties.PVcolor || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStylePV1(feature) {
-  let fillColor = feature.properties.PV1color || "#bdbdbd";
+  let fillColor = feature.properties.PV1color || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStylePV2(feature) {
-  let fillColor = feature.properties.PV2color || "#bdbdbd";
+  let fillColor = feature.properties.PV2color || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStylePV3(feature) {
-  let fillColor = feature.properties.PV3color || "#bdbdbd";
+  let fillColor = feature.properties.PV3color || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStylePV4(feature) {
-  let fillColor = feature.properties.PV4color || "#bdbdbd";
+  let fillColor = feature.properties.PV4color || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStylePV5(feature) {
-  let fillColor = feature.properties.PV5color || "#bdbdbd";
+  let fillColor = feature.properties.PV5color || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStylePV6(feature) {
-  let fillColor = feature.properties.PV6color || "#bdbdbd";
+  let fillColor = feature.properties.PV6color || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStylePV7(feature) {
-  let fillColor = feature.properties.PV7color || "#bdbdbd";
+  let fillColor = feature.properties.PV7color || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStylePV8(feature) {
-  let fillColor = feature.properties.PV8color || "#bdbdbd";
+  let fillColor = feature.properties.PV8color || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStyleDC(feature) {
-  let fillColor = feature.properties.DCcolor || "#bdbdbd";
+  let fillColor = feature.properties.DCcolor || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStyleDC1(feature) {
-  let fillColor = feature.properties.DC1color || "#bdbdbd";
+  let fillColor = feature.properties.DC1color || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStyleDC2(feature) {
-  let fillColor = feature.properties.DC2color || "#bdbdbd";
+  let fillColor = feature.properties.DC2color || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStyleDC3(feature) {
-  let fillColor = feature.properties.DC3color || "#bdbdbd";
+  let fillColor = feature.properties.DC3color || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStyleDC4(feature) {
-  let fillColor = feature.properties.DC4color || "#bdbdbd";
+  let fillColor = feature.properties.DC4color || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
 }
 
 function geomStyleHM(feature) {
-  let fillColor = feature.properties.HMcolor || "#bdbdbd";
+  let fillColor = feature.properties.HMcolor || "##bdbdbd";
   return {
     fillColor: fillColor,
-    weight: 0,
-    opacity: 1,
+    weight: 1,
+    opacity: 0.6,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStyleHM1(feature) {
+  let fillColor = feature.properties.HM1color || "##bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 1,
+    opacity: 0.6,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+function geomStyleHM2(feature) {
+  let fillColor = feature.properties.HM2color || "##bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 1,
+    opacity: 0.6,
     color: 'white',
     fillOpacity: 0.8
   };
@@ -823,8 +845,101 @@ let dc4GeojsonLayer = L.geoJSON(fc, {
   style: geomStyleDC4,
 });
 
+    // Housing Market
+    let hmGeojsonLayer = L.geoJSON(fc, {
+      onEachFeature: function (feature, layer) {
+        layer.on({
+          mouseout: function (e) {
+               e.target.setStyle(geomStyleHM);
+          },
+          click: function (e) {
+            var popupContent = `
+                <table class="popup-table">
+                    <tr>
+                        <td><strong>ID:</strong></td>
+                        <td>${e.target.feature.properties.id}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Housing Market Status:</strong></td>
+                        <td>${e.target.feature.properties.HM}</td>
+                    </tr>
+                </table>
+            `;
+        
+            // Bind the formatted popup content to the target feature and open the popup
+            e.target.bindPopup(popupContent).openPopup();
+        
+            // Prevent propagation of the click event
+            L.DomEvent.stopPropagation(e);
+        },
+        });
+      },
+      style: geomStyleHM,
+    });
 
+// Housing Market - Indicator 1 - Home Value Type
+let hm1GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStyleHM1);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Home Value Type:</strong></td>
+                    <td>${e.target.feature.properties.HM1hvt}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStyleHM1,
+});
 
+// Housing Market - Indicator 2 - Appreciation Type
+let hm2GeojsonLayer = L.geoJSON(fc, {
+  onEachFeature: function (feature, layer) {
+    layer.on({
+      mouseout: function (e) {
+           e.target.setStyle(geomStyleHM2);
+      },
+      click: function (e) {
+        var popupContent = `
+            <table class="popup-table">
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td>${e.target.feature.properties.id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Appreciation Type:</strong></td>
+                    <td>${e.target.feature.properties.HM2at}</td>
+                </tr>
+            </table>
+        `;
+    
+        // Bind the formatted popup content to the target feature and open the popup
+        e.target.bindPopup(popupContent).openPopup();
+    
+        // Prevent propagation of the click event
+        L.DomEvent.stopPropagation(e);
+    },
+    });
+  },
+  style: geomStyleHM2,
+});
 
 var baseMaps = {
     "Displacement Risk": drGeojsonLayer,
@@ -841,10 +956,10 @@ var baseMaps = {
     "2.1 Percent Change White": dc1GeojsonLayer,
     "2.2 Percent Change Income": dc2GeojsonLayer,
     "2.3 Percent Change Education": dc3GeojsonLayer,
-    "2.4 Percent Change Ownership": dc4GeojsonLayer
-    // "3 Housing Market": hmGeojsonLayer,
-    // "3.1 Home Value Type": hm1GeojsonLayer,
-    // "3.2 Appreciation Type": hm2GeojsonLayer
+    "2.4 Percent Change Ownership": dc4GeojsonLayer,
+    "3 Housing Market": hmGeojsonLayer,
+    "3.1 Home Value Type": hm1GeojsonLayer,
+    "3.2 Appreciation Type": hm2GeojsonLayer
 
   };
 
