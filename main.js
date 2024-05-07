@@ -8,6 +8,11 @@
 // the first is the geometry layer and the second the points
 let geomURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8_4O-l9fGClAHY2cuI3_mmtI9Kd6TRfSBephRcnRLnBW31j61WdDpfJRb2-6E_LUfroPyuHFzyqOS/pub?output=csv";
+let airbnbURL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSdU62QZyz0TP7CZWm_KRwkfzsQ8Va_Rt_w40jHEe6nlqgKfR0wDrvmMXrQZN5VSoFWl5tiAI31pO3E/pub?output=csv";
+let developmentURL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSO2MSvOnLzYCM2wcJXy_qbYtjK_YWzM5DIqJ1C0V_kWewAm8X3VZ-7RBUdoNXzNaOcalr6ZV3KjiaW/pub?output=csv";
+
 
 window.addEventListener("DOMContentLoaded", init);
 
@@ -53,6 +58,18 @@ function init() {
     download: true,
     header: true,
     complete: addGeoms,
+  });
+
+  Papa.parse(airbnbURL, {
+    download: true,
+    header: true,
+    complete: addAirbnbPoints,
+  });
+
+  Papa.parse(developmentURL, {
+    download: true,
+    header: true,
+    complete: addDevelopmentPoints,
   });
 
 }
@@ -1047,54 +1064,71 @@ sidebar.appendChild(htmlObject);
 })
 }
 
-
 /*
  * addPoints is a bit simpler, as no GeoJSON is needed for the points
  */
-function addPoints(data) {
+function addAirbnbPoints(data) {
   data = data.data;
-  let pointGroupLayer = L.layerGroup().addTo(map);
 
-  // Choose marker type. Options are:
-  // (these are case-sensitive, defaults to marker!)
-  // marker: standard point with an icon
-  // circleMarker: a circle with a radius set in pixels
-  // circle: a circle with a radius set in meters
-  let markerType = "marker";
+  // Create an object to store layer groups
+  let airbnbLayer = L.layerGroup();
+
 
   // Marker radius
   // Wil be in pixels for circleMarker, metres for circle
   // Ignore for point
-  let markerRadius = 100;
+  let markerRadius = 2;
 
   for (let row = 0; row < data.length; row++) {
-    let marker;
-    if (markerType == "circleMarker") {
-      marker = L.circleMarker([data[row].lat, data[row].lon], {
-        radius: markerRadius,
-      });
-    } else if (markerType == "circle") {
-      marker = L.circle([data[row].lat, data[row].lon], {
-        radius: markerRadius,
-      });
-    } else {
-      marker = L.marker([data[row].lat, data[row].lon]);
-    }
-    marker.addTo(pointGroupLayer);
-
-    // AwesomeMarkers is used to create fancier icons
-    let icon = L.AwesomeMarkers.icon({
-      icon: "info-circle",
-      iconColor: "white",
-      markerColor: data[row].color,
-      prefix: "fa",
-      extraClasses: "fa-rotate-0",
+    let fillColor = data[row].color ? data[row].color : 'red'; // Check if color is defined, otherwise default to black
+    let marker = L.circleMarker([data[row].lat, data[row].lon], {
+      radius: markerRadius,
+      fillColor: fillColor, // Fill color of the circle
+      fillOpacity: 1, // Opacity of the circle
+      stroke: false // Remove stroke
     });
-    if (!markerType.includes("circle")) {
-      marker.setIcon(icon);
-    }
+
+    marker.addTo(airbnbLayer);
   }
+
+  // Add the Airbnb layer to the map
+  airbnbLayer.addTo(map);
+
+
 }
+
+
+
+function addDevelopmentPoints(data) {
+  data = data.data;
+
+  // Create an object to store layer groups
+  let developmentLayer = L.layerGroup();
+
+  // Marker radius
+  // Wil be in pixels for circleMarker, metres for circle
+  // Ignore for point
+  let markerRadius = 2;
+
+  for (let row = 0; row < data.length; row++) {
+    let fillColor = data[row].color ? data[row].color : 'black'; // Check if color is defined, otherwise default to black
+    let marker = L.circleMarker([data[row].lat, data[row].lon], {
+      radius: markerRadius,
+      fillColor: fillColor, // Fill color of the circle
+      fillOpacity: 1, // Opacity of the circle
+      stroke: false // Remove stroke
+    });
+
+    marker.addTo(developmentLayer);
+    
+  }
+
+      // Add the Airbnb layer to the map
+      developmentLayer.addTo(map);
+
+}
+
+
 
 /*
  * Accepts any GeoJSON-ish object and returns an Array of
