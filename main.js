@@ -17,6 +17,25 @@ let developmentURL =
 window.addEventListener("DOMContentLoaded", init);
 
 let map;
+let drGeojsonLayer;
+let pvGeojsonLayer;
+let pv2GeojsonLayer;
+let pv3GeojsonLayer;
+let pv4GeojsonLayer;
+let pv5GeojsonLayer;
+let pv6GeojsonLayer;
+let pv7GeojsonLayer;
+let pv8GeojsonLayer;
+let dcGeojsonLayer;
+let dc1GeojsonLayer;
+let dc2GeojsonLayer;
+let dc3GeojsonLayer;
+let dc4GeojsonLayer;
+let hmGeojsonLayer;
+let hm1GeojsonLayer;
+let hm2GeojsonLayer;
+let airbnbLayer = L.layerGroup();
+let developmentLayer = L.layerGroup();
 
 /*
  * init() is called when the page has loaded
@@ -380,7 +399,7 @@ function geomStyleHM2(feature) {
 */
 
   // Displacement Risk
-  let drGeojsonLayer = L.geoJSON(fc, {
+  drGeojsonLayer = L.geoJSON(fc, {
     onEachFeature: function (feature, layer) {
       layer.on({
         mouseout: function (e) {
@@ -422,10 +441,10 @@ function geomStyleHM2(feature) {
       });
     },
     style: geomStyleDR,
-  });drGeojsonLayer.addTo(map);
+  }).addTo(map);
 
     // Population Vulnerability
-    let pvGeojsonLayer = L.geoJSON(fc, {
+    pvGeojsonLayer = L.geoJSON(fc, {
       onEachFeature: function (feature, layer) {
         layer.on({
           mouseout: function (e) {
@@ -489,7 +508,7 @@ function geomStyleHM2(feature) {
     });
 
 // Population Vulnerability - Indicator 1 - Renters
-let pv1GeojsonLayer = L.geoJSON(fc, {
+pv1GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -521,7 +540,7 @@ let pv1GeojsonLayer = L.geoJSON(fc, {
 });
 
 // Population Vulnerability - Indicator 2 - PoC
-let pv2GeojsonLayer = L.geoJSON(fc, {
+pv2GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -553,7 +572,7 @@ let pv2GeojsonLayer = L.geoJSON(fc, {
 });
 
 // Population Vulnerability - Indicator 3 - Higher Education
-let pv3GeojsonLayer = L.geoJSON(fc, {
+pv3GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -585,7 +604,7 @@ let pv3GeojsonLayer = L.geoJSON(fc, {
 });
 
 // Population Vulnerability - Indicator 4 - Income
-let pv4GeojsonLayer = L.geoJSON(fc, {
+pv4GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -617,7 +636,7 @@ let pv4GeojsonLayer = L.geoJSON(fc, {
 });
 
 // Population Vulnerability - Indicator 5 - Rent Burden
-let pv5GeojsonLayer = L.geoJSON(fc, {
+pv5GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -649,7 +668,7 @@ let pv5GeojsonLayer = L.geoJSON(fc, {
 });
 
 // Population Vulnerability - Indicator 6 - SNAP
-let pv6GeojsonLayer = L.geoJSON(fc, {
+pv6GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -681,7 +700,7 @@ let pv6GeojsonLayer = L.geoJSON(fc, {
 });
 
 // Population Vulnerability - Indicator 7 - Limited English
-let pv7GeojsonLayer = L.geoJSON(fc, {
+pv7GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -713,7 +732,7 @@ let pv7GeojsonLayer = L.geoJSON(fc, {
 });
 
 // Population Vulnerability - Indicator 8 - Single Parents
-let pv8GeojsonLayer = L.geoJSON(fc, {
+pv8GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -747,7 +766,7 @@ let pv8GeojsonLayer = L.geoJSON(fc, {
 
 
     // Demographic Change
-    let dcGeojsonLayer = L.geoJSON(fc, {
+    dcGeojsonLayer = L.geoJSON(fc, {
       onEachFeature: function (feature, layer) {
         layer.on({
           mouseout: function (e) {
@@ -795,7 +814,7 @@ let pv8GeojsonLayer = L.geoJSON(fc, {
     });
 
 // Demographic Change - Indicator 1 - Percent Change White
-let dc1GeojsonLayer = L.geoJSON(fc, {
+dc1GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -827,7 +846,7 @@ let dc1GeojsonLayer = L.geoJSON(fc, {
 });
 
 // Demographic Change - Indicator 2 - Percent Change Income
-let dc2GeojsonLayer = L.geoJSON(fc, {
+dc2GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -859,7 +878,7 @@ let dc2GeojsonLayer = L.geoJSON(fc, {
 });
 
 // Demographic Change - Indicator 3 - Percent Change Higher Education
-let dc3GeojsonLayer = L.geoJSON(fc, {
+dc3GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -891,7 +910,7 @@ let dc3GeojsonLayer = L.geoJSON(fc, {
 });
 
 // Demographic Change - Indicator 4 - Percent Change Owners
-let dc4GeojsonLayer = L.geoJSON(fc, {
+dc4GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -923,7 +942,7 @@ let dc4GeojsonLayer = L.geoJSON(fc, {
 });
 
     // Housing Market
-    let hmGeojsonLayer = L.geoJSON(fc, {
+    hmGeojsonLayer = L.geoJSON(fc, {
       onEachFeature: function (feature, layer) {
         layer.on({
           mouseout: function (e) {
@@ -963,7 +982,7 @@ let dc4GeojsonLayer = L.geoJSON(fc, {
     });
 
 // Housing Market - Indicator 1 - Home Value Type
-let hm1GeojsonLayer = L.geoJSON(fc, {
+hm1GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -995,7 +1014,7 @@ let hm1GeojsonLayer = L.geoJSON(fc, {
 });
 
 // Housing Market - Indicator 2 - Appreciation Type
-let hm2GeojsonLayer = L.geoJSON(fc, {
+hm2GeojsonLayer = L.geoJSON(fc, {
   onEachFeature: function (feature, layer) {
     layer.on({
       mouseout: function (e) {
@@ -1026,7 +1045,66 @@ let hm2GeojsonLayer = L.geoJSON(fc, {
   style: geomStyleHM2,
 });
 
-var baseMaps = {
+
+    addLayerControl();
+
+
+})
+}
+
+/*
+ * Add Airbnb points to the map
+ */
+function addAirbnbPoints(data) {
+  data = data.data;
+
+  // Marker radius
+  // Wil be in pixels for circleMarker, metres for circle
+  // Ignore for point
+  let markerRadius = 2;
+
+  for (let row = 0; row < data.length; row++) {
+    let fillColor = data[row].color ? data[row].color : 'red'; // Check if color is defined, otherwise default to black
+    let marker = L.circleMarker([data[row].lat, data[row].lon], {
+      radius: markerRadius,
+      fillColor: fillColor, // Fill color of the circle
+      fillOpacity: 1, // Opacity of the circle
+      stroke: false // Remove stroke
+    });
+
+    marker.addTo(airbnbLayer); // Add marker to Airbnb layer
+  }
+}
+
+/*
+ * Add development points to the map
+ */
+function addDevelopmentPoints(data) {
+  data = data.data;
+
+  // Marker radius
+  // Wil be in pixels for circleMarker, metres for circle
+  // Ignore for point
+  let markerRadius = 2;
+
+  for (let row = 0; row < data.length; row++) {
+    let fillColor = data[row].color ? data[row].color : 'black'; // Check if color is defined, otherwise default to black
+    let marker = L.circleMarker([data[row].lat, data[row].lon], {
+      radius: markerRadius,
+      fillColor: fillColor, // Fill color of the circle
+      fillOpacity: 1, // Opacity of the circle
+      stroke: false // Remove stroke
+    });
+
+    marker.addTo(developmentLayer); // Add marker to development layer
+  }
+}
+
+/*
+ * Add layer control
+ */
+function addLayerControl() {
+  var baseMaps = {
     "<b>Displacement Risk</b>": drGeojsonLayer,
     "<b><i>1 Population Vulnerability</i></b>": pvGeojsonLayer,
     "1.1 Percent Renters": pv1GeojsonLayer,
@@ -1045,87 +1123,25 @@ var baseMaps = {
     "<b><i>3 Housing Market</i></b>": hmGeojsonLayer,
     "3.1 Home Value Type": hm1GeojsonLayer,
     "3.2 Appreciation Type": hm2GeojsonLayer
-
   };
 
-// Create the control and add it to the map;
-var control = L.control.layers(baseMaps, null, { collapsed: false, position: 'topleft' });
-control.addTo(map);
+  var overlayMaps = {
+    "Airbnb Points": airbnbLayer,
+    "Development Points": developmentLayer
+  };
 
-// Call the getContainer routine.
-var htmlObject = control.getContainer();
- 
-// Get the desired parent node.
-var sidebar = document.getElementById('sidebar');
+  // Create the control and add it to the map;
+  var control = L.control.layers(baseMaps, overlayMaps, { collapsed: false, position: 'topleft' });
+  control.addTo(map);
 
-// Finally append the control container to the sidebar.
-sidebar.appendChild(htmlObject);
+  // Call the getContainer routine.
+  var htmlObject = control.getContainer();
 
-})
-}
+  // Get the desired parent node.
+  var sidebar = document.getElementById('sidebar');
 
-/*
- * addPoints is a bit simpler, as no GeoJSON is needed for the points
- */
-function addAirbnbPoints(data) {
-  data = data.data;
-
-  // Create an object to store layer groups
-  let airbnbLayer = L.layerGroup();
-
-
-  // Marker radius
-  // Wil be in pixels for circleMarker, metres for circle
-  // Ignore for point
-  let markerRadius = 2;
-
-  for (let row = 0; row < data.length; row++) {
-    let fillColor = data[row].color ? data[row].color : 'red'; // Check if color is defined, otherwise default to black
-    let marker = L.circleMarker([data[row].lat, data[row].lon], {
-      radius: markerRadius,
-      fillColor: fillColor, // Fill color of the circle
-      fillOpacity: 1, // Opacity of the circle
-      stroke: false // Remove stroke
-    });
-
-    marker.addTo(airbnbLayer);
-  }
-
-  // Add the Airbnb layer to the map
-  airbnbLayer.addTo(map);
-
-
-}
-
-
-
-function addDevelopmentPoints(data) {
-  data = data.data;
-
-  // Create an object to store layer groups
-  let developmentLayer = L.layerGroup();
-
-  // Marker radius
-  // Wil be in pixels for circleMarker, metres for circle
-  // Ignore for point
-  let markerRadius = 2;
-
-  for (let row = 0; row < data.length; row++) {
-    let fillColor = data[row].color ? data[row].color : 'black'; // Check if color is defined, otherwise default to black
-    let marker = L.circleMarker([data[row].lat, data[row].lon], {
-      radius: markerRadius,
-      fillColor: fillColor, // Fill color of the circle
-      fillOpacity: 1, // Opacity of the circle
-      stroke: false // Remove stroke
-    });
-
-    marker.addTo(developmentLayer);
-    
-  }
-
-      // Add the Airbnb layer to the map
-      developmentLayer.addTo(map);
-
+  // Finally append the control container to the sidebar.
+  sidebar.appendChild(htmlObject);
 }
 
 
