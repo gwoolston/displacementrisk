@@ -1125,14 +1125,12 @@ function addLayerControl() {
     "3.2 Appreciation Type": hm2GeojsonLayer
   };
 
-  var overlayMaps = {
-    "Airbnb Points": airbnbLayer,
-    "Development Points": developmentLayer
-  };
-
   // Create the control and add it to the map;
-  var control = L.control.layers(baseMaps, overlayMaps, { collapsed: false, position: 'topleft' });
+  var control = L.control.layers(baseMaps, null, { collapsed: false, position: 'topleft' });
   control.addTo(map);
+
+  control.addOverlay(airbnbLayer, "Airbnb Sites");
+  control.addOverlay(developmentLayer, "Development Sites");
 
   // Call the getContainer routine.
   var htmlObject = control.getContainer();
@@ -1142,6 +1140,7 @@ function addLayerControl() {
 
   // Finally append the control container to the sidebar.
   sidebar.appendChild(htmlObject);
+
 }
 
 
