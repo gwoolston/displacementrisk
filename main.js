@@ -12,7 +12,9 @@ let airbnbURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSdU62QZyz0TP7CZWm_KRwkfzsQ8Va_Rt_w40jHEe6nlqgKfR0wDrvmMXrQZN5VSoFWl5tiAI31pO3E/pub?output=csv";
 let developmentURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSO2MSvOnLzYCM2wcJXy_qbYtjK_YWzM5DIqJ1C0V_kWewAm8X3VZ-7RBUdoNXzNaOcalr6ZV3KjiaW/pub?output=csv";
-
+let partnersURL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRRFBSqLUaV4H6g5xizzGXxhP_USgFqragSLziPKFO33PtiCSH3ztLcSOoXYsQk8WPz5NF7GOWKDx8p/pub?output=csv";
+  
 
 window.addEventListener("DOMContentLoaded", init);
 
@@ -37,6 +39,7 @@ let hm1GeojsonLayer;
 let hm2GeojsonLayer;
 let airbnbLayer = L.layerGroup();
 let developmentLayer = L.layerGroup();
+let partnersLayer = L.layerGroup();
 
 /*
  * init() is called when the page has loaded
@@ -90,6 +93,12 @@ function init() {
     download: true,
     header: true,
     complete: addDevelopmentPoints,
+  });
+
+  Papa.parse(partnersURL, {
+    download: true,
+    header: true,
+    complete: addPartnersPoints,
   });
 
 }
@@ -1102,6 +1111,30 @@ function addDevelopmentPoints(data) {
 }
 
 /*
+ * Add partner points to the map
+ */
+function addPartnersPoints(data) {
+  data = data.data;
+
+  // Marker radius
+  // Wil be in pixels for circleMarker, metres for circle
+  // Ignore for point
+  let markerRadius = 3;
+
+  for (let row = 0; row < data.length; row++) {
+    let fillColor = data[row].color ? data[row].color : 'yellow'; // Check if color is defined, otherwise default to black
+    let marker = L.circleMarker([data[row].lat, data[row].lon], {
+      radius: markerRadius,
+      fillColor: fillColor, // Fill color of the circle
+      fillOpacity: 1, // Opacity of the circle
+      stroke: false // Remove stroke
+    });
+
+    marker.addTo(partnersLayer); // Add marker to partners layer
+  }
+}
+
+/*
  * Add layer control
  */
 function addLayerControl() {
@@ -1132,6 +1165,7 @@ function addLayerControl() {
 
   control.addOverlay(airbnbLayer, "Airbnb Sites");
   control.addOverlay(developmentLayer, "Development Sites");
+  control.addOverlay(partnersLayer, "Community Partners");
 
   // Call the getContainer routine.
   var htmlObject = control.getContainer();
