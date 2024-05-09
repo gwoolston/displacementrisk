@@ -1130,6 +1130,19 @@ function addPartnersPoints(data) {
       stroke: false // Remove stroke
     });
 
+    // Add popup with 'name' property from data
+    marker.bindPopup(data[row].name, {
+      closeButton: false // Remove close button from popup
+    });
+
+    marker.on('mouseover', function (e) {
+      this.openPopup();
+    });
+
+    marker.on('mouseout', function (e) {
+      this.closePopup();
+    });
+
     marker.addTo(partnersLayer); // Add marker to partners layer
   }
 }
@@ -1163,9 +1176,9 @@ function addLayerControl() {
   var control = L.control.layers(baseMaps, null, { collapsed: false, position: 'topleft' });
   control.addTo(map);
 
-  control.addOverlay(airbnbLayer, "Airbnb Sites");
-  control.addOverlay(developmentLayer, "Development Sites");
-  control.addOverlay(partnersLayer, "Community Partners");
+  control.addOverlay(airbnbLayer, "🟥 Airbnb Sites");
+  control.addOverlay(developmentLayer, "⬛ Development Sites");
+  control.addOverlay(partnersLayer, "🟨 Community Partners");
 
   // Call the getContainer routine.
   var htmlObject = control.getContainer();
