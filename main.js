@@ -1117,14 +1117,15 @@ function addPartnersPoints(data) {
   data = data.data;
 
   for (let row = 0; row < data.length; row++) {
-    let fillColor = data[row].color ? data[row].color : 'black'; // Check if color is defined, otherwise default to yellow
+    let fillColor = data[row].color ? data[row].color : 'black'; // Check if color is defined, otherwise default to black
     
     // Create a custom icon with a label above the dot
     let customIcon = L.divIcon({
       className: 'custom-div-icon',
       html: "<div style='background-color:" + fillColor + ";' class='marker-dot'></div><div class='marker-label'>" + data[row].labelname + "</div>",
       iconSize: [10, 10], // Adjust the size of the dot
-      iconAnchor: [5, 5] // To position the label correctly above the dot
+      iconAnchor: [5, 10], // To position the marker's bottom center at the coordinates
+      popupAnchor: [0, -10] // Set the popup anchor to be above the marker
     });
 
     // Create marker with custom icon
@@ -1132,9 +1133,18 @@ function addPartnersPoints(data) {
       icon: customIcon
     });
 
+    // Create popup content
+    let popupContent = "<b>Name:</b> " + data[row].name + "<br>" +
+    "<b>Address:</b> " + data[row].address + "<br>" +
+    "<b>Information:</b> " + data[row].info;
+
+    // Bind popup to marker
+    marker.bindPopup(popupContent);
+
     marker.addTo(partnersLayer); // Add marker to partners layer
   }
 }
+
 
 
 /*
