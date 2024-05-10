@@ -1098,7 +1098,7 @@ function addDevelopmentPoints(data) {
   let markerRadius = 2;
 
   for (let row = 0; row < data.length; row++) {
-    let fillColor = data[row].color ? data[row].color : 'black'; // Check if color is defined, otherwise default to black
+    let fillColor = data[row].color ? data[row].color : 'yellow'; // Check if color is defined, otherwise default to black
     let marker = L.circleMarker([data[row].lat, data[row].lon], {
       radius: markerRadius,
       fillColor: fillColor, // Fill color of the circle
@@ -1116,36 +1116,26 @@ function addDevelopmentPoints(data) {
 function addPartnersPoints(data) {
   data = data.data;
 
-  // Marker radius
-  // Wil be in pixels for circleMarker, metres for circle
-  // Ignore for point
-  let markerRadius = 3;
-
   for (let row = 0; row < data.length; row++) {
-    let fillColor = data[row].color ? data[row].color : 'yellow'; // Check if color is defined, otherwise default to black
-    let marker = L.circleMarker([data[row].lat, data[row].lon], {
-      radius: markerRadius,
-      fillColor: fillColor, // Fill color of the circle
-      fillOpacity: 1, // Opacity of the circle
-      stroke: false // Remove stroke
+    let fillColor = data[row].color ? data[row].color : 'black'; // Check if color is defined, otherwise default to yellow
+    
+    // Create a custom icon with a label above the dot
+    let customIcon = L.divIcon({
+      className: 'custom-div-icon',
+      html: "<div style='background-color:" + fillColor + ";' class='marker-dot'></div><div class='marker-label'>" + data[row].labelname + "</div>",
+      iconSize: [10, 10], // Adjust the size of the dot
+      iconAnchor: [5, 5] // To position the label correctly above the dot
     });
 
-    // Add popup with 'name' property from data
-    marker.bindPopup(data[row].name, {
-      closeButton: false // Remove close button from popup
-    });
-
-    marker.on('mouseover', function (e) {
-      this.openPopup();
-    });
-
-    marker.on('mouseout', function (e) {
-      this.closePopup();
+    // Create marker with custom icon
+    let marker = L.marker([data[row].lat, data[row].lon], {
+      icon: customIcon
     });
 
     marker.addTo(partnersLayer); // Add marker to partners layer
   }
 }
+
 
 /*
  * Add layer control
@@ -1177,8 +1167,8 @@ function addLayerControl() {
   control.addTo(map);
 
   control.addOverlay(airbnbLayer, "🟥 Airbnb Sites");
-  control.addOverlay(developmentLayer, "⬛ Development Sites");
-  control.addOverlay(partnersLayer, "🟨 Community Partners");
+  control.addOverlay(developmentLayer, "🟨 Development Sites");
+  control.addOverlay(partnersLayer, "⬛ Community Partners");
 
   // Call the getContainer routine.
   var htmlObject = control.getContainer();
