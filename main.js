@@ -14,7 +14,9 @@ let developmentURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSO2MSvOnLzYCM2wcJXy_qbYtjK_YWzM5DIqJ1C0V_kWewAm8X3VZ-7RBUdoNXzNaOcalr6ZV3KjiaW/pub?output=csv";
 let partnersURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRRFBSqLUaV4H6g5xizzGXxhP_USgFqragSLziPKFO33PtiCSH3ztLcSOoXYsQk8WPz5NF7GOWKDx8p/pub?output=csv";
-  
+  let zoneURL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vTJdaU0CiFxRI6_OliqQIiqQrk5PHEC4Sn27MXOO8m-KaNRL2RLxJzDkwaWBib1SIo9pDbZY1Mf0u95/pub?output=csv";
+
 
 window.addEventListener("DOMContentLoaded", init);
 
@@ -40,6 +42,7 @@ let hm2GeojsonLayer;
 let airbnbLayer = L.layerGroup();
 let developmentLayer = L.layerGroup();
 let partnersLayer = L.layerGroup();
+let zoningLayer = L.layerGroup();
 
 /*
  * init() is called when the page has loaded
@@ -99,6 +102,13 @@ function init() {
     download: true,
     header: true,
     complete: addPartnersPoints,
+  });
+
+
+Papa.parse(zoneURL, {
+    download: true,
+    header: true,
+    complete: addZoning,
   });
 
 }
@@ -1062,6 +1072,98 @@ hm2GeojsonLayer = L.geoJSON(fc, {
 })
 }
 
+
+/*
+ * Load Zoning Geometry Column
+ */
+
+function addZoning(data) {
+  data = data.data;
+
+  let fc = {
+    type: "FeatureCollection",
+    features: [],
+  };
+
+  let promises = [];
+
+  for (let row in data) {
+    if (data[row].include == "y") {
+      let geojsonUrl = data[row].geometry;
+      let promise = fetch(geojsonUrl)
+        .then(response => response.json())
+        .then(geojsonData => {
+          if (geojsonData.features && Array.isArray(geojsonData.features)) {
+            geojsonData.features.forEach((feature) => {
+              let properties = {
+
+                // General Info
+                id: data[row].id,
+                color: data[row].color,
+
+              };
+
+              let newFeature = {
+                type: "Feature",
+                geometry: feature.geometry,
+                properties: properties,
+              };
+              fc.features.push(newFeature);
+            });
+          } else {
+            console.error("Features array is missing or invalid in GeoJSON data fetched from the external URL.");
+          }
+        });
+
+      promises.push(promise);
+    }
+  }
+
+  Promise.all(promises).then(() => {
+    console.log(fc);
+
+/*
+* Styling
+*/
+
+function geomStylezoning(feature) {
+  let fillColor = feature.properties.color || "##bdbdbd";
+  return {
+    fillColor: fillColor,
+    weight: 1,
+    opacity: 0.6,
+    color: 'white',
+    fillOpacity: 0.8
+  };
+}
+
+  // Displacement Risk
+  zoningLayer = L.geoJSON(fc, {
+    onEachFeature: function (feature, layer) {
+        layer.on({
+            mouseover: function (e) {
+                var id = e.target.feature.properties.id;
+                // Update the content to display the ID
+                layer.bindTooltip("Zoning Type: " + id).openTooltip();
+            },
+            mouseout: function (e) {
+                // Close the tooltip when mouseout
+                layer.closeTooltip();
+            },
+            click: function (e) {
+                // Add click functionality if needed
+            }
+        });
+    },
+    style: geomStylezoning
+});
+
+
+})
+}
+
+
+
 /*
  * Add Airbnb points to the map
  */
@@ -1179,6 +1281,7 @@ function addLayerControl() {
   control.addOverlay(airbnbLayer, "🟥 Airbnb Sites");
   control.addOverlay(developmentLayer, "🟨 Development Sites");
   control.addOverlay(partnersLayer, "⬛ Community Partners");
+  control.addOverlay(zoningLayer, "Zoning");
 
   // Call the getContainer routine.
   var htmlObject = control.getContainer();
