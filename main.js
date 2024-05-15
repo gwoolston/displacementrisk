@@ -14,9 +14,8 @@ let developmentURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSO2MSvOnLzYCM2wcJXy_qbYtjK_YWzM5DIqJ1C0V_kWewAm8X3VZ-7RBUdoNXzNaOcalr6ZV3KjiaW/pub?output=csv";
 let partnersURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRRFBSqLUaV4H6g5xizzGXxhP_USgFqragSLziPKFO33PtiCSH3ztLcSOoXYsQk8WPz5NF7GOWKDx8p/pub?output=csv";
-  let zoneURL =
+let zoneURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vTJdaU0CiFxRI6_OliqQIiqQrk5PHEC4Sn27MXOO8m-KaNRL2RLxJzDkwaWBib1SIo9pDbZY1Mf0u95/pub?output=csv";
-
 
 window.addEventListener("DOMContentLoaded", init);
 
@@ -40,7 +39,8 @@ let hmGeojsonLayer;
 let hm1GeojsonLayer;
 let hm2GeojsonLayer;
 let airbnbLayer = L.layerGroup();
-let developmentLayer = L.layerGroup();
+let lowincomedevelopmentLayer = L.layerGroup();
+let marketratedevelopmentLayer = L.layerGroup();
 let partnersLayer = L.layerGroup();
 let zoningLayer = L.layerGroup();
 
@@ -1194,21 +1194,26 @@ function addAirbnbPoints(data) {
 function addDevelopmentPoints(data) {
   data = data.data;
 
-  // Marker radius
-  // Wil be in pixels for circleMarker, metres for circle
-  // Ignore for point
-  let markerRadius = 2;
-
   for (let row = 0; row < data.length; row++) {
-    let fillColor = data[row].color ? data[row].color : 'yellow'; // Check if color is defined, otherwise default to black
-    let marker = L.circleMarker([data[row].lat, data[row].lon], {
-      radius: markerRadius,
-      fillColor: fillColor, // Fill color of the circle
+    let lowIncomeRadius = data[row].lradius ? data[row].lradius : 2; // Default radius for low income if not provided
+    let marketRateRadius = data[row].mradius ? data[row].mradius : 2; // Default radius for market rate if not provided
+
+    let lowIncomeMarker = L.circleMarker([data[row].lat, data[row].lon], {
+      radius: lowIncomeRadius,
+      fillColor: 'yellow', // Fill color for low income points
       fillOpacity: 1, // Opacity of the circle
       stroke: false // Remove stroke
     });
 
-    marker.addTo(developmentLayer); // Add marker to development layer
+    let marketRateMarker = L.circleMarker([data[row].lat, data[row].lon], {
+      radius: marketRateRadius,
+      fillColor: 'blue', // Fill color for market rate points
+      fillOpacity: 1, // Opacity of the circle
+      stroke: false // Remove stroke
+    });
+
+    lowIncomeMarker.addTo(lowincomedevelopmentLayer); // Add low income marker to low income development layer
+    marketRateMarker.addTo(marketratedevelopmentLayer); // Add market rate marker to market rate development layer
   }
 }
 
@@ -1279,7 +1284,8 @@ function addLayerControl() {
   control.addTo(map);
 
   control.addOverlay(airbnbLayer, "🟥 Airbnb Sites");
-  control.addOverlay(developmentLayer, "🟨 Development Sites");
+  control.addOverlay(lowincomedevelopmentLayer, "🟨 Low Income Development Sites");
+  control.addOverlay(marketratedevelopmentLayer, "🟦 Market Rate Development Sites");
   control.addOverlay(partnersLayer, "⬛ Community Partners");
   control.addOverlay(zoningLayer, "Zoning");
 
