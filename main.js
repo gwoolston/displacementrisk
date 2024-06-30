@@ -54,16 +54,15 @@ function init() {
   var mapOptions = {
     center: [37.06819799730071, -122.06944452658796],
     zoom: 11,
-    zoomControl: true
+    zoomControl: false
   }
  map = L.map('map', mapOptions);
- map.removeControl(map.zoomControl);
-
 
   // add Zoom Control
   L.control.zoom({
     position: 'bottomright'
   }).addTo(map);
+
 
   // add Basemap (Carto Positron)
   var geographyBasemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
