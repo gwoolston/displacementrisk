@@ -747,3 +747,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	white-space: nowrap; /* Prevent text from wrapping */
   }
   
+  .legend-square {
+	display: inline-block;
+	width: 10px; /* Adjust the size of the square as needed */
+	height: 10px; /* Adjust the size of the square as needed */
+	margin-right: 5px; /* Adjust spacing between square and text */
+	border: 1px solid #000; /* Black border around the square */
+  }

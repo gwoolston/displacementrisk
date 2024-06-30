@@ -1298,6 +1298,42 @@ function addLayerControl() {
   control.addTo(map);
   
   var sidebar = document.getElementById('sidebar');
+
+  var legend = L.control({ position: 'topright' });
+
+  legend.onAdd = function(map) {
+    var div = L.DomUtil.create('div', 'info legend');
+    div.innerHTML = getLegendContent(currentLayer); // Initial legend content based on current layer
+    return div;
+  };
+
+  legend.addTo(map);
+
+  function getLegendContent(layer) {
+    // Example legend content for drGeojsonLayer
+    if (layer === drGeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee5d9;"></span> Not at Risk<br>
+          <span class="legend-square" style="background-color: #fcae91;"></span> Potential Risk of Displacement<br>
+          <span class="legend-square" style="background-color: #fb6a4a;"></span> Imminent Risk of Displacement<br>
+          <span class="legend-square" style="background-color: #cb181d;"></span> Active Displacement<br>
+          <span class="legend-square" style="background-color: #cccccc;"></span> Continued Loss<br>
+          <span class="legend-square" style="background-color: #969696;"></span> Exclusive<br>
+        </div>
+      `;
+    }
+    // Add other layers' legends as needed
+    // Remember to update this function when adding new layers or changing legends
+    return '';
+  }
+
+  function updateLegend() {
+    var legendDiv = document.getElementsByClassName('info legend')[0];
+    if (legendDiv) {
+      legendDiv.innerHTML = getLegendContent(currentLayer);
+    }
+  }
   
   function addRadioButtons(layers, headingText, defaultLayer) {
     var heading = document.createElement('h4');
@@ -1316,6 +1352,7 @@ function addLayerControl() {
           }
           map.addLayer(layer);
           currentLayer = layer;
+          updateLegend();
   
           // Ensure overlay layers are always on top
           for (var overlayKey in overlayLayers) {
@@ -1369,7 +1406,6 @@ function addLayerControl() {
   addRadioButtons(riskmapLayers, "Risk Map:", drGeojsonLayer);
   addCheckboxes(overlayLayers, "Additional Variables:");
 }
-
 
 /*
  * Accepts any GeoJSON-ish object and returns an Array of
