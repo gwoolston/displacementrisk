@@ -1139,7 +1139,7 @@ function geomStylezoning(feature) {
   };
 }
 
-  // Displacement Risk
+  // Zoning
   zoningLayer = L.geoJSON(fc, {
     onEachFeature: function (feature, layer) {
         layer.on({
@@ -1260,7 +1260,7 @@ function addPartnersPoints(data) {
  * Add layer control
  */
 function addLayerControl() {
-  var baseMaps = {
+  var riskmapLayers = {
     "<b>Displacement Risk</b>": drGeojsonLayer,
     "<b><i>1 Population Vulnerability</i></b>": pvGeojsonLayer,
     "1.1 Percent Renters": pv1GeojsonLayer,
@@ -1280,27 +1280,100 @@ function addLayerControl() {
     "3.1 Home Value Type": hm1GeojsonLayer,
     "3.2 Appreciation Type": hm2GeojsonLayer
   };
-
-  // Create the control and add it to the map;
+  
+  var overlayLayers = {
+    "🟥 Airbnb Sites": airbnbLayer, 
+    "🟨 Low Income Development Sites": lowincomedevelopmentLayer,
+    "🟦 Market Rate Development Sites": marketratedevelopmentLayer,
+    "⬛ Community Partners": partnersLayer,
+    "Zoning": zoningLayer
+  };
+  
+  var baseMaps = {};
+  var currentLayer = drGeojsonLayer; // Set the initial layer
+  map.addLayer(currentLayer); // Add the initial layer to the map
+  
   var control = L.control.layers(baseMaps, null, { collapsed: false, position: 'topleft' });
   control.addTo(map);
-
-  control.addOverlay(airbnbLayer, "🟥 Airbnb Sites");
-  control.addOverlay(lowincomedevelopmentLayer, "🟨 Low Income Development Sites");
-  control.addOverlay(marketratedevelopmentLayer, "🟦 Market Rate Development Sites");
-  control.addOverlay(partnersLayer, "⬛ Community Partners");
-  control.addOverlay(zoningLayer, "Zoning");
-
-  // Call the getContainer routine.
-  var htmlObject = control.getContainer();
-
-  // Get the desired parent node.
+  
   var sidebar = document.getElementById('sidebar');
-
-  // Finally append the control container to the sidebar.
-  sidebar.appendChild(htmlObject);
-
+  
+  function addRadioButtons(layers, headingText, defaultLayer) {
+    var heading = document.createElement('h4');
+    heading.innerHTML = headingText;
+    sidebar.appendChild(heading);
+  
+    for (var key in layers) {
+      var input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'layerGroup';
+      input.checked = layers[key] === defaultLayer; // Check if it's the default layer
+      input.onchange = (function(layer) {
+        return function() {
+          if (currentLayer) {
+            map.removeLayer(currentLayer);
+          }
+          map.addLayer(layer);
+          currentLayer = layer;
+  
+          // Ensure overlay layers are always on top
+          for (var overlayKey in overlayLayers) {
+            var overlayLayer = overlayLayers[overlayKey];
+            if (map.hasLayer(overlayLayer)) {
+              map.removeLayer(overlayLayer);
+              map.addLayer(overlayLayer);
+            }
+          }
+        };
+      })(layers[key]);
+  
+      var label = document.createElement('label');
+      label.innerHTML = key; // Use innerHTML to support formatting
+      label.style.display = 'block'; // Ensure each label is on a new line
+      label.style.marginBottom = '5px'; // Add some margin for spacing
+      
+      label.insertBefore(input, label.firstChild); // Insert the input element at the beginning of the label
+      sidebar.appendChild(label); // Append the label to the sidebar
+    }
+  }
+  
+  function addCheckboxes(layers, headingText) {
+    var heading = document.createElement('h4');
+    heading.innerHTML = headingText;
+    sidebar.appendChild(heading);
+  
+    for (var key in layers) {
+      var input = document.createElement('input');
+      input.type = 'checkbox';
+      input.onchange = (function(layer) {
+        return function() {
+          if (this.checked) {
+            map.addLayer(layer);
+          } else {
+            map.removeLayer(layer);
+          }
+        };
+      })(layers[key]);
+  
+      var label = document.createElement('label');
+      label.innerHTML = key; // Use innerHTML to support formatting
+      label.style.display = 'block'; // Ensure each label is on a new line
+      label.style.marginBottom = '5px'; // Add some margin for spacing
+      
+      label.insertBefore(input, label.firstChild); // Insert the input element at the beginning of the label
+      sidebar.appendChild(label); // Append the label to the sidebar
+    }
+  }
+  
+  addRadioButtons(riskmapLayers, "Risk Map:", drGeojsonLayer);
+  addCheckboxes(overlayLayers, "Additional Variables:");
 }
+
+
+
+
+
+
 
 /*
  * Accepts any GeoJSON-ish object and returns an Array of
