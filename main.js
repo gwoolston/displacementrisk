@@ -1461,6 +1461,32 @@ function addLayerControl() {
         </div>
       `;
     }
+    if (layer === hmGeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee5d9;"></span> Low TBD<br>
+          <span class="legend-square" style="background-color: #fcae91;"></span> Accelerating<br>
+          <span class="legend-square" style="background-color: #fb6a4a;"></span> Appreciated<br>
+          <span class="legend-square" style="background-color: #cb181d;"></span> Exclusive<br>
+        </div>
+      `;
+    }  
+    if (layer === hm1GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fc9272;"></span> Low / Moderate<br>
+          <span class="legend-square" style="background-color: #de2d26;"></span> High<br>
+        </div>
+      `;
+    }
+    if (layer === hm2GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fc9272;"></span> Low / Moderate<br>
+          <span class="legend-square" style="background-color: #de2d26;"></span> High<br>
+        </div>
+      `;
+    }
     return '';
   }
 
