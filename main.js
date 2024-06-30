@@ -1303,14 +1303,15 @@ function addLayerControl() {
 
   legend.onAdd = function(map) {
     var div = L.DomUtil.create('div', 'info legend');
-    div.innerHTML = getLegendContent(currentLayer); // Initial legend content based on current layer
+    div.innerHTML = getLegendContent(currentLayer);
     return div;
   };
-
+  
   legend.addTo(map);
 
   function getLegendContent(layer) {
-    // Example legend content for drGeojsonLayer
+    var content = '';
+
     if (layer === drGeojsonLayer) {
       return `
         <div>
@@ -1487,13 +1488,36 @@ function addLayerControl() {
         </div>
       `;
     }
-    return '';
+    if (layer === lowincomedevelopmentLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee5d9;"></span> TEST LOW INCOME<br>
+        </div>
+      `;
+    }
+    if (layer === marketratedevelopmentLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee5d9;"></span> TEST MARKET RATE<br>
+        </div>
+      `;
+    }
+    return content;
   }
-
+  
   function updateLegend() {
     var legendDiv = document.getElementsByClassName('info legend')[0];
     if (legendDiv) {
-      legendDiv.innerHTML = getLegendContent(currentLayer);
+      var legendContent = getLegendContent(currentLayer);
+  
+      for (var overlayKey in overlayLayers) {
+        var overlayLayer = overlayLayers[overlayKey];
+        if (map.hasLayer(overlayLayer)) {
+          legendContent += getLegendContent(overlayLayer);
+        }
+      }
+  
+      legendDiv.innerHTML = legendContent || ''; // Clear legend if no content
     }
   }
   
@@ -1506,7 +1530,7 @@ function addLayerControl() {
       var input = document.createElement('input');
       input.type = 'radio';
       input.name = 'layerGroup';
-      input.checked = layers[key] === defaultLayer; // Check if it's the default layer
+      input.checked = layers[key] === defaultLayer;
       input.onchange = (function(layer) {
         return function() {
           if (currentLayer) {
@@ -1516,7 +1540,6 @@ function addLayerControl() {
           currentLayer = layer;
           updateLegend();
   
-          // Ensure overlay layers are always on top
           for (var overlayKey in overlayLayers) {
             var overlayLayer = overlayLayers[overlayKey];
             if (map.hasLayer(overlayLayer)) {
@@ -1528,12 +1551,11 @@ function addLayerControl() {
       })(layers[key]);
   
       var label = document.createElement('label');
-      label.innerHTML = key; // Use innerHTML to support formatting
-      label.style.display = 'block'; // Ensure each label is on a new line
-      label.style.marginBottom = '5px'; // Add some margin for spacing
-      
-      label.insertBefore(input, label.firstChild); // Insert the input element at the beginning of the label
-      sidebar.appendChild(label); // Append the label to the sidebar
+      label.innerHTML = key;
+      label.style.display = 'block';
+      label.style.marginBottom = '5px';
+      label.insertBefore(input, label.firstChild);
+      sidebar.appendChild(label);
     }
   }
   
@@ -1552,16 +1574,16 @@ function addLayerControl() {
           } else {
             map.removeLayer(layer);
           }
+          updateLegend();
         };
       })(layers[key]);
   
       var label = document.createElement('label');
-      label.innerHTML = key; // Use innerHTML to support formatting
-      label.style.display = 'block'; // Ensure each label is on a new line
-      label.style.marginBottom = '5px'; // Add some margin for spacing
-      
-      label.insertBefore(input, label.firstChild); // Insert the input element at the beginning of the label
-      sidebar.appendChild(label); // Append the label to the sidebar
+      label.innerHTML = key;
+      label.style.display = 'block';
+      label.style.marginBottom = '5px';
+      label.insertBefore(input, label.firstChild);
+      sidebar.appendChild(label);
     }
   }
   
