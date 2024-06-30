@@ -1323,8 +1323,144 @@ function addLayerControl() {
         </div>
       `;
     }
-    // Add other layers' legends as needed
-    // Remember to update this function when adding new layers or changing legends
+    if (layer === pvGeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee0d2;"></span> Not Vulnerable<br>
+          <span class="legend-square" style="background-color: #fc9272;"></span> Vulnerable<br>
+          <span class="legend-square" style="background-color: #de2d26;"></span> Very Vulnerable<br>
+        </div>
+      `;
+    }
+    if (layer === pv1GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee5d9;"></span> < 25%<br>
+          <span class="legend-square" style="background-color: #fcae91;"></span> 25% - 50%<br>
+          <span class="legend-square" style="background-color: #fb6a4a;"></span> 50% - 75%<br>
+          <span class="legend-square" style="background-color: #cb181d;"></span> > 75%<br>
+        </div>
+      `;
+    }
+    if (layer === pv2GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee5d9;"></span> < 25%<br>
+          <span class="legend-square" style="background-color: #fcae91;"></span> 25% - 50%<br>
+          <span class="legend-square" style="background-color: #fb6a4a;"></span> 50% - 75%<br>
+          <span class="legend-square" style="background-color: #cb181d;"></span> > 75%<br>
+        </div>
+      `;
+    }
+    if (layer === pv3GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee5d9;"></span> < 25%<br>
+          <span class="legend-square" style="background-color: #fcae91;"></span> 25% - 50%<br>
+          <span class="legend-square" style="background-color: #fb6a4a;"></span> 50% - 75%<br>
+          <span class="legend-square" style="background-color: #cb181d;"></span> > 75%<br>
+        </div>
+      `;
+    }
+    if (layer === pv4GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #cb181d;"></span> < $50,000<br>
+          <span class="legend-square" style="background-color: #fb6a4a;"></span> $50,000 - $100,000<br>
+          <span class="legend-square" style="background-color: #fcae91;"></span> $100,000 - $150,000<br>
+          <span class="legend-square" style="background-color: #fee5d9;"></span> > $150,000<br>
+        </div>
+      `;
+    }
+    if (layer === pv5GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee5d9;"></span> 10 - 20<br>
+          <span class="legend-square" style="background-color: #fcae91;"></span> 20 - 30<br>
+          <span class="legend-square" style="background-color: #fb6a4a;"></span> 30 - 40<br>
+          <span class="legend-square" style="background-color: #cb181d;"></span> > 40<br>
+        </div>
+      `;
+    }
+    if (layer === pv6GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee5d9;"></span> < 10%<br>
+          <span class="legend-square" style="background-color: #fcae91;"></span> 10% - 20%<br>
+          <span class="legend-square" style="background-color: #fb6a4a;"></span> 20% - 30%<br>
+          <span class="legend-square" style="background-color: #cb181d;"></span> > 30%<br>
+        </div>
+      `;
+    }
+    if (layer === pv7GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee5d9;"></span> < 10%<br>
+          <span class="legend-square" style="background-color: #fcae91;"></span> 10% - 25%<br>
+          <span class="legend-square" style="background-color: #fb6a4a;"></span> 25% - 40%<br>
+          <span class="legend-square" style="background-color: #cb181d;"></span> > 40%<br>
+        </div>
+      `;
+    }
+    if (layer === pv8GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee5d9;"></span> < 25%<br>
+          <span class="legend-square" style="background-color: #fcae91;"></span> 25% - 50%<br>
+          <span class="legend-square" style="background-color: #fb6a4a;"></span> 50% - 75%<br>
+          <span class="legend-square" style="background-color: #cb181d;"></span> > 75%<br>
+        </div>
+      `;
+    }
+    if (layer === dcGeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #fee0d2;"></span> No Change<br>
+          <span class="legend-square" style="background-color: #fc9272;"></span> Some Change<br>
+          <span class="legend-square" style="background-color: #de2d26;"></span> Most Change<br>
+        </div>
+      `;
+    }
+    if (layer === dc1GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #0571b0;"></span> Large Decrease<br>
+          <span class="legend-square" style="background-color: #92c5de;"></span> Decrease<br>
+          <span class="legend-square" style="background-color: #f4a582;"></span> Increase<br>
+          <span class="legend-square" style="background-color: #ca0020;"></span> Large Increase<br>
+        </div>
+      `;
+    }
+    if (layer === dc2GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #0571b0;"></span> Large Decrease<br>
+          <span class="legend-square" style="background-color: #92c5de;"></span> Decrease<br>
+          <span class="legend-square" style="background-color: #f4a582;"></span> Increase<br>
+          <span class="legend-square" style="background-color: #ca0020;"></span> Large Increase<br>
+        </div>
+      `;
+    }
+    if (layer === dc3GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #0571b0;"></span> Large Decrease<br>
+          <span class="legend-square" style="background-color: #92c5de;"></span> Decrease<br>
+          <span class="legend-square" style="background-color: #f4a582;"></span> Increase<br>
+          <span class="legend-square" style="background-color: #ca0020;"></span> Large Increase<br>
+        </div>
+      `;
+    }
+    if (layer === dc4GeojsonLayer) {
+      return `
+        <div>
+          <span class="legend-square" style="background-color: #0571b0;"></span> Large Decrease<br>
+          <span class="legend-square" style="background-color: #92c5de;"></span> Decrease<br>
+          <span class="legend-square" style="background-color: #f4a582;"></span> Increase<br>
+          <span class="legend-square" style="background-color: #ca0020;"></span> Large Increase<br>
+        </div>
+      `;
+    }
     return '';
   }
 
