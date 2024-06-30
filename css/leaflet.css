@@ -672,7 +672,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	}
 
 #sidebar {
-	position: fixed;
+    position: fixed;
     top: 0;
     left: 0;
     width: 300px;
@@ -680,20 +680,22 @@ svg.leaflet-image-layer.leaflet-interactive path {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-	padding-left: 20px;
-	}
-
-#layerControlContainer {
-    padding: 10px;
+    padding-left: 20px;
+    z-index: 1000; /* Ensure sidebar is above map */
 }
-	
+
+#map-container {
+    position: absolute;
+    top: 0;
+    left: 300px; /* Adjust left to accommodate sidebar width */
+    width: calc(100% - 300px); /* Adjust width to fit remaining space */
+    height: 100%;
+}
+
 #map {
-	position: absolute;
-	top: 0;
-	left: 300px; /* Adjust left position to accommodate sidebar width */
-	width: calc(100% - 300px); /* Adjust to account for sidebar width */
-	height: 100%;
-	}
+    width: 100%;
+    height: 100%;
+}
 
 .popup-table {
 	width: 100%;

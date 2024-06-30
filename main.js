@@ -52,11 +52,13 @@ function init() {
 
   // Create Map, Center on Santa Cruz
   var mapOptions = {
-    center: [37.06961402113251, -121.85643431204376],
+    center: [37.06819799730071, -122.06944452658796],
     zoom: 11,
-    zoomControl: false
+    zoomControl: true
   }
  map = L.map('map', mapOptions);
+ map.removeControl(map.zoomControl);
+
 
   // add Zoom Control
   L.control.zoom({
@@ -1368,11 +1370,6 @@ function addLayerControl() {
   addRadioButtons(riskmapLayers, "Risk Map:", drGeojsonLayer);
   addCheckboxes(overlayLayers, "Additional Variables:");
 }
-
-
-
-
-
 
 
 /*
