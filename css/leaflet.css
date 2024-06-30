@@ -754,3 +754,12 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	margin-right: 5px; /* Adjust spacing between square and text */
 	border: 1px solid #000; /* Black border around the square */
   }
+
+  .info.legend {
+	background-color: white; /* Set background color to white */
+	border: 1px solid gray; /* Add a gray border */
+	padding: 10px; /* Add padding for spacing */
+	border-radius: 5px; /* Optional: round the corners */
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Optional: add a subtle shadow */
+  }
+  
