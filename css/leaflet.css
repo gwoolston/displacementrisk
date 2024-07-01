@@ -763,3 +763,47 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Optional: add a subtle shadow */
   }
   
+  .legend-radius-1 {
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	margin-right: 5px;
+	border: 1px solid #000;
+  }
+  
+  .legend-radius-2 {
+	display: inline-block;
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	margin-right: 5px;
+	border: 1px solid #000;
+  }
+  
+  .legend-radius-3 {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	margin-right: 5px;
+	border: 1px solid #000;
+  }
+  
+  .legend-radius-4 {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	margin-right: 5px;
+	border: 1px solid #000;
+  }
+  
+  .legend-radius-5 {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	margin-right: 5px;
+	border: 1px solid #000;
+  }

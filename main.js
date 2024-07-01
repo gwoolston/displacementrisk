@@ -1491,14 +1491,22 @@ function addLayerControl() {
     if (layer === lowincomedevelopmentLayer) {
       return `
         <div>
-          <span class="legend-square" style="background-color: #fee5d9;"></span> TEST LOW INCOME<br>
+          <span class="legend-radius-1" style="background-color: yellow;"></span> 0 Units<br>
+          <span class="legend-radius-2" style="background-color: yellow;"></span> 0 - 10 Units<br>
+          <span class="legend-radius-3" style="background-color: yellow;"></span> 10 - 25 Units<br>
+          <span class="legend-radius-4" style="background-color: yellow;"></span> 25 - 250 Units<br>
+          <span class="legend-radius-5" style="background-color: yellow;"></span> > 250 Units<br>
         </div>
       `;
     }
     if (layer === marketratedevelopmentLayer) {
       return `
         <div>
-          <span class="legend-square" style="background-color: #fee5d9;"></span> TEST MARKET RATE<br>
+          <span class="legend-radius-1" style="background-color: blue;"></span> 0 Units<br>
+          <span class="legend-radius-2" style="background-color: blue;"></span> 0 - 10 Units<br>
+          <span class="legend-radius-3" style="background-color: blue;"></span> 10 - 25 Units<br>
+          <span class="legend-radius-4" style="background-color: blue;"></span> 25 - 250 Units<br>
+          <span class="legend-radius-5" style="background-color: blue;"></span> > 250 Units<br>       
         </div>
       `;
     }
@@ -1509,11 +1517,19 @@ function addLayerControl() {
     var legendDiv = document.getElementsByClassName('info legend')[0];
     if (legendDiv) {
       var legendContent = getLegendContent(currentLayer);
+      var hasOverlayLegend = false;
   
       for (var overlayKey in overlayLayers) {
         var overlayLayer = overlayLayers[overlayKey];
         if (map.hasLayer(overlayLayer)) {
-          legendContent += getLegendContent(overlayLayer);
+          var overlayLegendContent = getLegendContent(overlayLayer);
+          if (overlayLegendContent) {
+            if (legendContent) {
+              legendContent += '<hr>'; // Add horizontal line before each additional legend content
+            }
+            legendContent += overlayLegendContent;
+            hasOverlayLegend = true;
+          }
         }
       }
   
